@@ -4,6 +4,7 @@ import './App.css'
 
 import ContactList from '../ContactList/ContactList';
 import SearchBox from '../SearchBox/SearchBox';
+import ContactForm from '../ContactForm/ContactForm';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -20,20 +21,40 @@ const initialContactsDisplay = () => {
 };
 
 function App() {
-  const [contacts] = useState(initialContactsDisplay);
-   const [searchName, setSearchName] = useState('');
+  const [contacts, setContacts] = useState(initialContactsDisplay);
+  const [searchName, setSearchName] = useState('');
 
-useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('contacts-list', JSON.stringify(contacts));
   }, [contacts]);
+
+  const addContact = newContact => {
+    setContacts(prevContactList => {
+      return [...prevContactList, newContact];
+    });
+  };
+
+  const deleteContact = contactId => {
+    setContacts(prevContactList => {
+      return prevContactList.filter(contact => contact.id !== contactId);
+    });
+  };
+
+  const searchedContacts = contacts.filter(contact =>
+    contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
+  );
 
   return (
     <div>
       <h1>Phonebook</h1>
 
-       <SearchBox value={searchName} onSearch={setSearchName} />
+      <ContactForm onContactAdd={addContact} />
+
+      <SearchBox value={searchName} onSearch={setSearchName} />
 
       <ContactList
+        contacts={searchedContacts}
+        onContactDelete={deleteContact}
       />
     </div>
   );

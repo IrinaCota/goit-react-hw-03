@@ -1,30 +1,27 @@
 import { FaUser } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
-
-import PropTypes from 'prop-types';
 import css from './Contact.module.css';
 
-export default function Contact({ name, contactNumber}) {
+export default function Contact({ data, onContactDelete }) {
   return (
     <div className={css.card}>
       <div className={css.info}>
         <p>
           <FaUser className={css.icon} />
-          {name}
+          {data.name}
         </p>
         <p>
           <FaPhoneAlt className={css.icon} />
-          {contactNumber}
+          {data.number}
         </p>
       </div>
-      <button className={css.btn}>
+      <button className={css.btn}
+        onClick={() => {
+          onContactDelete(data.id);
+        }}
+      >
         Delete
       </button>
     </div>
   );
 }
-
-Contact.propTypes = {
-  name: PropTypes.string,
-  contactNumber: PropTypes.string,
-};
