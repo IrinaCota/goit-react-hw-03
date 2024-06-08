@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
-import { useId } from 'react';
-import css from './SearchBox.module.css';
+import PropTypes from "prop-types";
+import { useId } from "react";
+import css from "./SearchBox.module.css";
 
 export default function SearchBox({ value, onSearch }) {
   const filterFieldId = useId();
@@ -12,7 +12,7 @@ export default function SearchBox({ value, onSearch }) {
         type="text"
         id={filterFieldId}
         value={value}
-        onChange={event => onSearch(event.target.value)}
+        onChange={(event) => onSearch(event.target.value)}
       />
     </div>
   );

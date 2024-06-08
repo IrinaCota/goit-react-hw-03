@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import './App.css'
+import "./App.css";
 
-import ContactList from '../ContactList/ContactList';
-import SearchBox from '../SearchBox/SearchBox';
-import ContactForm from '../ContactForm/ContactForm';
+import ContactList from "../ContactList/ContactList";
+import SearchBox from "../SearchBox/SearchBox";
+import ContactForm from "../ContactForm/ContactForm";
 
 const initialContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+  { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+  { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+  { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 
 const initialContactsDisplay = () => {
-  const savedContactsList = localStorage.getItem('contacts-list');
+  const savedContactsList = localStorage.getItem("contacts-list");
   return savedContactsList !== null
     ? JSON.parse(savedContactsList)
     : initialContacts;
@@ -22,25 +22,25 @@ const initialContactsDisplay = () => {
 
 function App() {
   const [contacts, setContacts] = useState(initialContactsDisplay);
-  const [searchName, setSearchName] = useState('');
+  const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
-    localStorage.setItem('contacts-list', JSON.stringify(contacts));
+    localStorage.setItem("contacts-list", JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = newContact => {
-    setContacts(prevContactList => {
+  const addContact = (newContact) => {
+    setContacts((prevContactList) => {
       return [...prevContactList, newContact];
     });
   };
 
-  const deleteContact = contactId => {
-    setContacts(prevContactList => {
-      return prevContactList.filter(contact => contact.id !== contactId);
+  const deleteContact = (contactId) => {
+    setContacts((prevContactList) => {
+      return prevContactList.filter((contact) => contact.id !== contactId);
     });
   };
 
-  const searchedContacts = contacts.filter(contact =>
+  const searchedContacts = contacts.filter((contact) =>
     contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
   );
 
@@ -60,5 +60,4 @@ function App() {
   );
 }
 
-
-export default App
+export default App;
