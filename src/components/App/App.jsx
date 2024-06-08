@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 
 import ContactList from '../ContactList/ContactList';
+import SearchBox from '../SearchBox/SearchBox';
 
 const initialContacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -20,6 +21,7 @@ const initialContactsDisplay = () => {
 
 function App() {
   const [contacts] = useState(initialContactsDisplay);
+   const [searchName, setSearchName] = useState('');
 
 useEffect(() => {
     localStorage.setItem('contacts-list', JSON.stringify(contacts));
@@ -28,6 +30,9 @@ useEffect(() => {
   return (
     <div>
       <h1>Phonebook</h1>
+
+       <SearchBox value={searchName} onSearch={setSearchName} />
+
       <ContactList
       />
     </div>
