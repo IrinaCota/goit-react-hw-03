@@ -1,6 +1,7 @@
-import { FaUser } from 'react-icons/fa';
-import { FaPhoneAlt } from 'react-icons/fa';
-import css from './Contact.module.css';
+import { FaUser } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import css from "./Contact.module.css";
+import PropTypes from "prop-types";
 
 export default function Contact({ name, number, id, onContactDelete }) {
   return (
@@ -15,9 +16,10 @@ export default function Contact({ name, number, id, onContactDelete }) {
           {number}
         </p>
       </div>
-      <button className={css.btn}
+      <button
+        className={css.btn}
         onClick={() => {
-          onContactDelete(id)
+          onContactDelete(id);
         }}
       >
         Delete
@@ -26,3 +28,9 @@ export default function Contact({ name, number, id, onContactDelete }) {
   );
 }
 
+Contact.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  onContactDelete: PropTypes.func,
+};
