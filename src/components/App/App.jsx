@@ -34,9 +34,9 @@ function App() {
     });
   };
 
-  const deleteContact = (contactId) => {
+  const deleteContact = (id) => {
     setContacts((prevContactList) => {
-      return prevContactList.filter((contact) => contact.id !== contactId);
+      return prevContactList.filter((contact) => contact.id !== id);
     });
   };
 
